@@ -1,0 +1,26 @@
+package ui;
+
+import java.awt.Image;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class FirstUI extends JPanel{
+
+	private JLabel nameL;
+	private Image setting;
+	private Image settingL;
+	
+	private final int panelWidth = 320;
+	private final int panelHeight = 480;
+	
+	public FirstUI(){
+		initui();
+	}
+	
+	private void initui(){
+		this.setLayout(null);
+		this.setSize(panelWidth, panelHeight);
+		
+	}
+}

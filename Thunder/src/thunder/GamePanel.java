@@ -10,6 +10,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	/*屏幕的宽度*/
 	private int mScreenWidth=320;
 	private int mScreenHeight=480;
+	
 	/*游戏主菜单状态*/
 	private static final int STATE_GAME=0;
 	/*游戏状态*/
@@ -20,16 +21,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	/*记录两张背景图片更新时的y坐标*/
 	private int mBitposY0=0;
 	private int mBitposY1=0;
+	
 	/*子弹对象的数量*/
 	final static int BULLET_POOL_COUNT=15;
 	/*飞机移动步长*/
-	final static int PLAN_STEP=10;
+	final static int PLAN_STEP=10;	
 	/*每500ms发射一颗子弹*/
 	final static int PLAN_TIME=500;
+	
 	/*敌人对象的数量*/
 	final static int ENEMY_POOL_COUNT=5;
 	/*敌人飞机偏移量*/
 	final static int ENEMY_POS_OFF=65;
+	
 	/*游戏主线程*/
 	private Thread mThread=null;
 	/*线程循环标志*/

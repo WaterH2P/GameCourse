@@ -41,7 +41,7 @@ public class Enemy {
 			mPlayID++;
 		}
 		//当敌机状态为存活状态
-		Image pic=Toolkit.getDefaultToolkit().getImage("image\\el_0.png");
+		Image pic=Toolkit.getDefaultToolkit().getImage("image\\el_1.png");
 		g.drawImage(pic, m_posX, m_posY,(ImageObserver)i);
 	}
 	
