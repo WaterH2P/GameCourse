@@ -1,0 +1,69 @@
+package ui;
+
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+/**
+ * 
+ * @Description: 
+ * @author: 
+ * @date:
+ */
+public class FirstUI extends JPanel{
+	
+	private final int panelWidth = 320;
+	private final int panelHeight = 480;
+	
+	private Image mainSet;
+	private ImageIcon nameSet;
+	private ImageIcon patternSet1;
+	private ImageIcon patternSet2;
+	
+	private JLabel nameL;
+	
+	private JButton patternB1;
+	private JButton patternB2;
+	
+	public FirstUI(){
+		Images();
+		initui();
+	}
+	
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);  
+		g.drawImage(mainSet, 0, 0, this.getWidth(), this.getHeight(), this); 
+	}
+	
+	/** 
+	 * 初始化第一个界面中所要使用的图片
+	 * setting:背景图片
+	 */
+	private void Images(){
+		mainSet = Toolkit.getDefaultToolkit().getImage("image//FirstUI_01.jpg");
+		nameSet = new ImageIcon("image//FirstUI_name_01.jpg");
+	}
+	
+	private void initui(){
+		Labels();
+		
+		this.setLayout(null);
+		this.setSize(panelWidth, panelHeight);
+		this.setVisible(true);
+		
+		this.add(nameL);
+		nameL.setLocation((this.getWidth()-nameL.getWidth())/2, 50);
+		
+	}
+	
+	private void Labels(){
+		nameL = new JLabel();
+		nameL.setIcon(nameSet);
+		nameL.setSize(150, 70);
+	}
+	
+}

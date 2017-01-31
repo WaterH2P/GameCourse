@@ -1,0 +1,15 @@
+package ui;
+
+import javax.swing.JButton;
+
+public class Button extends JButton{
+	private boolean isFcous = false;
+	
+	public boolean getStatus(){
+		return isFcous;
+	}
+	
+	public void setStatus(boolean status){
+		this.isFcous = status;
+	}
+}
