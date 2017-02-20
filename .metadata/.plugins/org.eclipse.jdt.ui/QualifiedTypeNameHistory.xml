@@ -12,4 +12,10 @@
 <fullyQualifiedTypeName name="java.awt.event.MouseEvent"/>
 <fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="java.awt.Cursor"/>
+<fullyQualifiedTypeName name="ui.FirstUIControllerServer"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+<fullyQualifiedTypeName name="controller.FirstUIControllerImpl"/>
+<fullyQualifiedTypeName name="java.awt.image.ColorModel"/>
+<fullyQualifiedTypeName name="java.awt.image.ImageProducer"/>
+<fullyQualifiedTypeName name="java.awt.image.MemoryImageSource"/>
 </qualifiedTypeNameHistroy>

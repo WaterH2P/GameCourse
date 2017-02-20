@@ -1,17 +1,16 @@
 package ui;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import controller.FirstUIControllerImpl;
 /**
  * @Description: 
  * @author: hzp
@@ -35,6 +34,8 @@ public class FirstUI extends JPanel{
 	
 	private Button classicPatternB;
 	private Button horriblePatternB;
+	
+	private FirstUIControllerServer controller = new FirstUIControllerImpl();
 	
 	public FirstUI(){
 		Images();
@@ -100,6 +101,13 @@ public class FirstUI extends JPanel{
 					classicPatternB.setIcon(patternSet1_1);
 			}
 		});
+		classicPatternB.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				controller.intoClassicPattern();
+			}
+		});
 		
 		horriblePatternB = new Button();
 		horriblePatternB.setSize(buttonWidth, buttonHeight);
@@ -116,6 +124,14 @@ public class FirstUI extends JPanel{
 				if(!horriblePatternB.getStatus())
 					horriblePatternB.setIcon(patternSet2_1);
 			}
+		});
+		horriblePatternB.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				controller.intoHorriblePatternB();
+			}
+			
 		});
 	}
 	

@@ -16,6 +16,7 @@ public class test {
 		frame.setSize(frameWidth, frameHeight);
 		
 		frame.setLocation(450, 100);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(jpanel);
 	}
 	

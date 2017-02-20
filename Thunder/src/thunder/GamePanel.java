@@ -162,7 +162,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 		for(int i=0;i<ENEMY_POOL_COUNT;i++){
 			mEnemy[i].UpdateEnemy();
 			/*敌机死亡且爆炸动画结束或者敌机超过屏幕还未死亡则重置坐标*/
-			if(mEnemy[i].mAnimState==Enemy.ENEMY_DEATH_STATE&&
+			if(mEnemy[i].enemyState==Enemy.ENEMY_DEATH_STATE&&
 					mEnemy[i].mPlayID==6||mEnemy[i].m_posY>=mScreenHeight){
 				mEnemy[i].init(UtilRandom(0,ENEMY_POOL_COUNT)*ENEMY_POS_OFF,0);
 			}
@@ -197,7 +197,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 						||(mBullet[i].m_posY<=mEnemy[j].m_posY+60
 						&&mBullet[i].m_posY>=mEnemy[j].m_posY))
 						){   //发生碰撞敌人的状态修改为死亡
-				mEnemy[j].mAnimState=Enemy.ENEMY_DEATH_STATE;
+				mEnemy[j].enemyState=Enemy.ENEMY_DEATH_STATE;
 				}
 			}
 		}
