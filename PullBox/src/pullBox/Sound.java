@@ -3,7 +3,7 @@ import javax.sound.midi.*;
 import java.io.File;
 
 public class Sound {
-	//²¥·Å±³¾°ÒôÀÖ
+	//æ’­æ”¾èƒŒæ™¯éŸ³ä¹
 	String path=new String("G:/javagame workspace/PullBox/musics//");
 	String file=new String("monkey.MP3");
 	Sequence seq;

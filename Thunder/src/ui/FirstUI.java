@@ -48,8 +48,8 @@ public class FirstUI extends JPanel{
 //	}
 	
 	/** 
-	 * 初始化第一个界面中所要使用的图片
-	 * setting:背景图片
+	 * 鍒濆鍖栫涓�涓晫闈腑鎵�瑕佷娇鐢ㄧ殑鍥剧墖
+	 * setting:鑳屾櫙鍥剧墖
 	 */
 	private void Images(){
 //		mainSet = Toolkit.getDefaultToolkit().getImage("image//FirstUI_01.jpg");

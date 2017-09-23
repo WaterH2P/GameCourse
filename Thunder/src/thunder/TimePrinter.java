@@ -19,8 +19,8 @@ public class TimePrinter extends Thread{
 		}
 	}
 	public static void main(String args[]){
-		TimePrinter tp1=new TimePrinter(1000,"Fast Guy");   //Ïß³ÌµÄ´´½¨
-		tp1.start();										//Ïß³ÌµÄÆô¶¯
+		TimePrinter tp1=new TimePrinter(1000,"Fast Guy");   //çº¿ç¨‹çš„åˆ›å»º
+		tp1.start();										//çº¿ç¨‹çš„å¯åŠ¨
 		TimePrinter tp2=new TimePrinter(3000,"Slow Guy");
 		tp2.start();
 	}

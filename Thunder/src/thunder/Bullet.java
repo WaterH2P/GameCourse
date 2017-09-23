@@ -5,33 +5,33 @@ import javax.swing.JPanel;
 
 public class Bullet {
 	/*
-	 * ×Óµ¯µÄxÖáËÙ¶È
-	 * ×Óµ¯µÄyÖáËÙ¶È
+	 * å­å¼¹çš„xè½´é€Ÿåº¦
+	 * å­å¼¹çš„yè½´é€Ÿåº¦
 	 */
 	static final int BULLET_STEP_X=3;
 	static final int BULLET_STEP_Y=35;
 	
 	/*
-	 * ×Óµ¯Í¼Æ¬µÄ¿í¶È
-	 * ×Óµ¯Í¼Æ¬µÄ¸ß¶È
+	 * å­å¼¹å›¾ç‰‡çš„å®½åº¦
+	 * å­å¼¹å›¾ç‰‡çš„é«˜åº¦
 	 */
 	static final int BULLET_WIDEH=30;
 	static final int BULLET_HEIGHT=30;
 	
 	/*
-	 * ×Óµ¯µÄ(x,y)×ø±ê
+	 * å­å¼¹çš„(x,y)åæ ‡
 	 */
 	public int m_posX=0;
-	public int m_posY=-20;             //³õÊ¼Ê±×Óµ¯ÔÚÆÁÄ»Íâ
+	public int m_posY=-20;             //åˆå§‹æ—¶å­å¼¹åœ¨å±å¹•å¤–
 	
 	/*
-	 * ÊÇ·ñ¸üĞÂ»æÖÆ×Óµ¯
+	 * æ˜¯å¦æ›´æ–°ç»˜åˆ¶å­å¼¹
 	 */
 	boolean ifUpdate=true;
-	private Image pic[]=null;          //×Óµ¯Í¼Æ¬×é
+	private Image pic[]=null;          //å­å¼¹å›¾ç‰‡ç»„
 
 	/*
-	 * µ±Ç°Ö¡µÄID
+	 * å½“å‰å¸§çš„ID
 	 */
 	private int mPlayID=0;
 	
@@ -43,7 +43,7 @@ public class Bullet {
 	}
 	
 	/*
-	 * ³õÊ¼»¯×ø±ê
+	 * åˆå§‹åŒ–åæ ‡
 	 */
 	public void init(int x,int y){
 		m_posX=x;
@@ -52,7 +52,7 @@ public class Bullet {
 	}
 	
 	/*
-	 * »æÖÆ×Óµ¯
+	 * ç»˜åˆ¶å­å¼¹
 	 */
 	public void DrawBullet(Graphics g, JPanel i){
 		g.drawImage(pic[mPlayID++],m_posX,m_posY,(ImageObserver)i);
@@ -61,7 +61,7 @@ public class Bullet {
 	}
 	
 	/*
-	 * ¸üĞÂ×Óµ¯µÄ×ø±êµã
+	 * æ›´æ–°å­å¼¹çš„åæ ‡ç‚¹
 	 */
 	public void UpdateBullet(){
 		if(ifUpdate)

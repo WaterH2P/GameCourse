@@ -8,20 +8,20 @@ import java.awt.image.MemoryImageSource;
 import javax.swing.JPanel;
 
 public class Enemy {
-	/**µĞ»úµÄ×´Ì¬**/
+	/**æ•Œæœºçš„çŠ¶æ€**/
 	public static final int ENEMY_ALIVE_STATE = 0;
 	public static final int ENEMY_DEATH_STATE = 1;
 	
-	/**µĞ»úĞĞ×ßyÖáµÄËÙ¶È**/
+	/**æ•Œæœºè¡Œèµ°yè½´çš„é€Ÿåº¦**/
 	static final int ENEMY_STEP_Y = 5;
 	
-	/**µĞ»úµÄ(x,y)×ø±ê**/
+	/**æ•Œæœºçš„(x,y)åæ ‡**/
 	public int m_posX = 0;
 	public int m_posY = 0;
 	public int enemyState = ENEMY_ALIVE_STATE;
-	private Image enemyExplorePic[] = new Image[6];  //µĞ»ú±¬Õ¨Í¼Æ¬×éºÏ
+	private Image enemyExplorePic[] = new Image[6];  //æ•Œæœºçˆ†ç‚¸å›¾ç‰‡ç»„åˆ
 	
-	/**µ±Ç°Ö¡µÄID**/
+	/**å½“å‰å¸§çš„ID**/
 	public int mPlayID = 0;
 	
 	public Enemy(){
@@ -29,7 +29,7 @@ public class Enemy {
 			enemyExplorePic[i] = Toolkit.getDefaultToolkit().getImage("image\\bomb_enemy_"+i+".png");
 	}
 	
-	/*³õÊ¼»¯×ø±ê*/
+	/*åˆå§‹åŒ–åæ ‡*/
 	public void init(int x,int y){
 		m_posX = x;
 		m_posY = y;
@@ -37,14 +37,14 @@ public class Enemy {
 		mPlayID = 0;
 	}
 	
-	/*»æÖÆµĞ»ú*/
+	/*ç»˜åˆ¶æ•Œæœº*/
 	public void DrawEnemy(Graphics g, JPanel jpanel){
-		//µ±µĞ»ú×´Ì¬ÎªËÀÍöÇÒËÀÍö¶¯»­²¥·ÅÍê±Ï£¬Ôò²»ÔÙ»æÖÆµĞ»ú
+		//å½“æ•ŒæœºçŠ¶æ€ä¸ºæ­»äº¡ä¸”æ­»äº¡åŠ¨ç”»æ’­æ”¾å®Œæ¯•ï¼Œåˆ™ä¸å†ç»˜åˆ¶æ•Œæœº
 		if(enemyState==ENEMY_DEATH_STATE && mPlayID<6){
 			g.drawImage(enemyExplorePic[mPlayID], m_posX, m_posY, (ImageObserver)jpanel);
 			mPlayID++;
 		}
-		//µ±µĞ»ú×´Ì¬Îª´æ»î×´Ì¬
+		//å½“æ•ŒæœºçŠ¶æ€ä¸ºå­˜æ´»çŠ¶æ€
 		Image pic = Toolkit.getDefaultToolkit().getImage("image\\el_1.png");
 		int iw = pic.getWidth((ImageObserver)jpanel);
 		int ih = pic.getHeight((ImageObserver)jpanel);
@@ -61,17 +61,17 @@ public class Enemy {
 				pixels[i]= red<<16|green<<8|blue;
 			}
 		}
-		//½«Êı×éÖĞµÄÏóËØ²úÉúÒ»¸öÍ¼Ïñ
+		//å°†æ•°ç»„ä¸­çš„è±¡ç´ äº§ç”Ÿä¸€ä¸ªå›¾åƒ
 		ImageProducer ip=new MemoryImageSource(iw,ih,pixels,0,iw);
 		pic = Toolkit.getDefaultToolkit().createImage(ip);
 		
-		//¸ù¾İ´¦ÀíÍêµÄÏñËØ´´½¨Í¼Ïñ¡£
+		//æ ¹æ®å¤„ç†å®Œçš„åƒç´ åˆ›å»ºå›¾åƒã€‚
 		
 		
 		g.drawImage(pic, m_posX, m_posY,(ImageObserver)jpanel);
 	}
 	
-	/*¸üĞÂµĞ»ú×ø±ê*/
+	/*æ›´æ–°æ•Œæœºåæ ‡*/
 	public void UpdateEnemy(){
 		m_posY = m_posY + ENEMY_STEP_Y;
 	}

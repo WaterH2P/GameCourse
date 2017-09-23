@@ -7,73 +7,73 @@ import java.util.Random;
 import javax.swing.*;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener{
-	/*ÆÁÄ»µÄ¿í¶È*/
+	/*å±å¹•çš„å®½åº¦*/
 	private int mScreenWidth=320;
 	private int mScreenHeight=480;
 	
-	/*ÓÎÏ·Ö÷²Ëµ¥×´Ì¬*/
+	/*æ¸¸æˆä¸»èœå•çŠ¶æ€*/
 	private static final int STATE_GAME=0;
-	/*ÓÎÏ·×´Ì¬*/
+	/*æ¸¸æˆçŠ¶æ€*/
 	private int mState=STATE_GAME;
-	/*ÓÎÏ·±³¾°×ÊÔ´£¬Á½ÕÅÍ¼Æ¬ÇĞ»»ÈÃÆÁÄ»¹ö¶¯ÆğÀ´*/
+	/*æ¸¸æˆèƒŒæ™¯èµ„æºï¼Œä¸¤å¼ å›¾ç‰‡åˆ‡æ¢è®©å±å¹•æ»šåŠ¨èµ·æ¥*/
 	private Image mBitMenuBG0=null;
 	private Image mBitMenuBG1=null;
-	/*¼ÇÂ¼Á½ÕÅ±³¾°Í¼Æ¬¸üĞÂÊ±µÄy×ø±ê*/
+	/*è®°å½•ä¸¤å¼ èƒŒæ™¯å›¾ç‰‡æ›´æ–°æ—¶çš„yåæ ‡*/
 	private int mBitposY0=0;
 	private int mBitposY1=0;
 	
-	/*×Óµ¯¶ÔÏóµÄÊıÁ¿*/
+	/*å­å¼¹å¯¹è±¡çš„æ•°é‡*/
 	final static int BULLET_POOL_COUNT=15;
-	/*·É»úÒÆ¶¯²½³¤*/
+	/*é£æœºç§»åŠ¨æ­¥é•¿*/
 	final static int PLAN_STEP=10;	
-	/*Ã¿500ms·¢ÉäÒ»¿Å×Óµ¯*/
+	/*æ¯500mså‘å°„ä¸€é¢—å­å¼¹*/
 	final static int PLAN_TIME=500;
 	
-	/*µĞÈË¶ÔÏóµÄÊıÁ¿*/
+	/*æ•Œäººå¯¹è±¡çš„æ•°é‡*/
 	final static int ENEMY_POOL_COUNT=5;
-	/*µĞÈË·É»úÆ«ÒÆÁ¿*/
+	/*æ•Œäººé£æœºåç§»é‡*/
 	final static int ENEMY_POS_OFF=65;
 	
-	/*ÓÎÏ·Ö÷Ïß³Ì*/
+	/*æ¸¸æˆä¸»çº¿ç¨‹*/
 	private Thread mThread=null;
-	/*Ïß³ÌÑ­»·±êÖ¾*/
+	/*çº¿ç¨‹å¾ªç¯æ ‡å¿—*/
 	private boolean mIsRunning =false;
-	/*·É»úÔÚÆÁÄ»ÖĞµÄ×ø±ê*/
+	/*é£æœºåœ¨å±å¹•ä¸­çš„åæ ‡*/
 	public int mAirPosX=mScreenWidth/2-15;
 	public int mAirPosY=mScreenHeight-30;
 	
-	/*µĞ»ú¶ÔÏóÊı×é*/
+	/*æ•Œæœºå¯¹è±¡æ•°ç»„*/
 	Enemy mEnemy[]=null;
-	/*×Óµ¯¶ÔÏóÊı×é*/
+	/*å­å¼¹å¯¹è±¡æ•°ç»„*/
 	Bullet mBullet[]=null;
-	/*³õÊ¼»¯·¢Éä×Óµ¯ID*/
+	/*åˆå§‹åŒ–å‘å°„å­å¼¹ID*/
 	public int mSendId=0;
-	/*ÉÏÒ»¿Å×Óµ¯·¢ÉäÊ±¼ä*/
+	/*ä¸Šä¸€é¢—å­å¼¹å‘å°„æ—¶é—´*/
 	public Long mSendTime=0L;
-	Image myPlanePic[];      /*Íæ¼Ò·É»úµÄËùÓĞÍ¼Æ¬*/
-	public int myPlaneID=0;  /*Íæ¼Ò·É»úµ±Ç°µÄÖ¡ºÅ*/
+	Image myPlanePic[];      /*ç©å®¶é£æœºçš„æ‰€æœ‰å›¾ç‰‡*/
+	public int myPlaneID=0;  /*ç©å®¶é£æœºå½“å‰çš„å¸§å·*/
 	
 	final static int BULLET_UP_OFFSET=30;
 	private int count=0;
 	
 	public GamePanel(){
 		setPreferredSize(new Dimension(mScreenWidth,mScreenHeight));
-		//Éè¶¨½¹µãÔÚ±¾´°¿Ú²¢¸³Óè¼àÌı¶ÔÏó
+		//è®¾å®šç„¦ç‚¹åœ¨æœ¬çª—å£å¹¶èµ‹äºˆç›‘å¬å¯¹è±¡
 		setFocusable(true);
 		addKeyListener(this);
 		init();
 		setGameState(STATE_GAME);
 		mIsRunning=true;
-		mThread=new Thread(this);  //ÊµÀıÏß³Ì
-		/*Æô¶¯ÓÎÏ·Ïß³Ì*/
+		mThread=new Thread(this);  //å®ä¾‹çº¿ç¨‹
+		/*å¯åŠ¨æ¸¸æˆçº¿ç¨‹*/
 		mThread.start();
 		setVisible(true);
 	}
 	public void run(){
 		while(mIsRunning){
-			/*Ë¢ĞÂÆÁÄ»*/
+			/*åˆ·æ–°å±å¹•*/
 			Draw();
-			//ÑÓÊ±0.1s
+			//å»¶æ—¶0.1s
 			try{
 				Thread.sleep(100);
 			}catch(InterruptedException e){
@@ -82,28 +82,28 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 		}
 	}
 	/*
-	 * init()·½·¨³õÊ¼»¯¸÷ÖÖ¶ÔÏó£¬°üÀ¨Á½ÕÅ±³¾°Í¼Æ¬mBitMenuBG0ºÍmBitMenuBG1£¬
-	 * Í¨¹ıÕâÁ½ÕÅ±³¾°Í¼Æ¬µÄÇĞ»»ÊµÏÖÓÎÏ·±³¾°¶¯Ì¬ÒÆ¶¯µÄĞ§¹û¡£
-	 * ³õÊ¼»¯Íæ¼Ò·É»úµÄ×ø±ê(150,400)µã´¦¡£
-	 * ´´½¨5¸öµØ·½·É»ú¶ÔÏómEnemyÊı×é£¬Í¬Ê±´´½¨15¸ö×Óµ¯Àà¶ÔÏómBulletÊı×é¡£
+	 * init()æ–¹æ³•åˆå§‹åŒ–å„ç§å¯¹è±¡ï¼ŒåŒ…æ‹¬ä¸¤å¼ èƒŒæ™¯å›¾ç‰‡mBitMenuBG0å’ŒmBitMenuBG1ï¼Œ
+	 * é€šè¿‡è¿™ä¸¤å¼ èƒŒæ™¯å›¾ç‰‡çš„åˆ‡æ¢å®ç°æ¸¸æˆèƒŒæ™¯åŠ¨æ€ç§»åŠ¨çš„æ•ˆæœã€‚
+	 * åˆå§‹åŒ–ç©å®¶é£æœºçš„åæ ‡(150,400)ç‚¹å¤„ã€‚
+	 * åˆ›å»º5ä¸ªåœ°æ–¹é£æœºå¯¹è±¡mEnemyæ•°ç»„ï¼ŒåŒæ—¶åˆ›å»º15ä¸ªå­å¼¹ç±»å¯¹è±¡mBulletæ•°ç»„ã€‚
 	 */
 	public void init(){
 		mBitMenuBG0=Toolkit.getDefaultToolkit().getImage("image\\map_0.jpg");
 		mBitMenuBG1=Toolkit.getDefaultToolkit().getImage("image\\map_1.jpg");
-		/*µÚÒ»ÕÅÍ¼Æ¬½ôÌùÔÚÆÁÄ»(0,0)µã´¦£¬µÚ¶şÕÅÍ¼Æ¬ÔÚµÚÒ»ÕÅÍ¼Æ¬ÉÏ·½*/
+		/*ç¬¬ä¸€å¼ å›¾ç‰‡ç´§è´´åœ¨å±å¹•(0,0)ç‚¹å¤„ï¼Œç¬¬äºŒå¼ å›¾ç‰‡åœ¨ç¬¬ä¸€å¼ å›¾ç‰‡ä¸Šæ–¹*/
 		mBitposY0=0;
 		mBitposY1=-mScreenHeight;
-		/*³õÊ¼»¯Íæ¼Ò·É»úÏà¹ØµÄ6ÕÅÍ¼Æ¬¶ÔÏó*/
+		/*åˆå§‹åŒ–ç©å®¶é£æœºç›¸å…³çš„6å¼ å›¾ç‰‡å¯¹è±¡*/
 		myPlanePic=new Image[6];
 		for(int i=0;i<6;i++)
 			myPlanePic[i]=Toolkit.getDefaultToolkit().getImage("image\\plane.png");
-		/*´´½¨µĞ»ú¶ÔÏó*/
+		/*åˆ›å»ºæ•Œæœºå¯¹è±¡*/
 		mEnemy=new Enemy[ENEMY_POOL_COUNT];
 		for(int i=0;i<ENEMY_POOL_COUNT;i++){
 			mEnemy[i]=new Enemy();
 			mEnemy[i].init(i*ENEMY_POS_OFF, i*ENEMY_POS_OFF-300);
 		}
-		/*´´½¨×Óµ¯Àà¶ÔÏó*/
+		/*åˆ›å»ºå­å¼¹ç±»å¯¹è±¡*/
 		mBullet=new Bullet[BULLET_POOL_COUNT];
 		for(int i=0;i<BULLET_POOL_COUNT;i++){
 			mBullet[i]=new Bullet();
@@ -114,8 +114,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	protected void Draw(){
 		switch(mState){
 		case STATE_GAME:
-			renderBg();  //»æÖÆÓÎÏ·½çÃæ
-			updateBg();  //¸üĞÂÓÎÏ·Âß¼­
+			renderBg();  //ç»˜åˆ¶æ¸¸æˆç•Œé¢
+			updateBg();  //æ›´æ–°æ¸¸æˆé€»è¾‘
 			break;
 		}
 	}
@@ -132,12 +132,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	}
 	
 	public void paint(Graphics g){
-		/*»æÖÆÓÎÏ·µØÍ¼*/
+		/*ç»˜åˆ¶æ¸¸æˆåœ°å›¾*/
 		g.drawImage(mBitMenuBG0, 0, mBitposY0, this);
 		g.drawImage(mBitMenuBG1, 0, mBitposY1, this);
-		/*»æÖÆ×Ô¼ºµÄ·É»ú¶¯»­*/
+		/*ç»˜åˆ¶è‡ªå·±çš„é£æœºåŠ¨ç”»*/
 		g.drawImage(myPlanePic[myPlaneID], mAirPosX, mAirPosY, this);
-		/*»æÖÆ×Óµ¯¶¯»­*/
+		/*ç»˜åˆ¶å­å¼¹åŠ¨ç”»*/
 		for(int i=0;i<BULLET_POOL_COUNT;i++)
 			mBullet[i].DrawBullet(g, this);
 		for(int i=0;i<ENEMY_POOL_COUNT;i++)
@@ -145,29 +145,29 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	}
 	
 	public void updateBg(){
-		/*¸üĞÂÓÎÏ·±³¾°Í¼Æ¬ÊµÏÖÏòÏÂ¹ö¶¯Ğ§¹û*/
-		mBitposY0=mBitposY0+10;   /*µÚÒ»ÕÅµØÍ¼map_0µÄ×İ×ø±êÏÂÒÆ10¸öÏñËØ*/
-		mBitposY1=mBitposY1+10;   /*µÚÒ»ÕÅµØÍ¼map_1µÄ×İ×ø±êÏÂÒÆ10¸öÏñËØ*/
-		if(mBitposY0==mScreenHeight){   //³¬¹ıÓÎÏ·ÆÁÄ»µÄµ×±ß
-			mBitposY0=-mScreenHeight;   //»Øµ½ÆÁÄ»ÉÏ·½
+		/*æ›´æ–°æ¸¸æˆèƒŒæ™¯å›¾ç‰‡å®ç°å‘ä¸‹æ»šåŠ¨æ•ˆæœ*/
+		mBitposY0=mBitposY0+10;   /*ç¬¬ä¸€å¼ åœ°å›¾map_0çš„çºµåæ ‡ä¸‹ç§»10ä¸ªåƒç´ */
+		mBitposY1=mBitposY1+10;   /*ç¬¬ä¸€å¼ åœ°å›¾map_1çš„çºµåæ ‡ä¸‹ç§»10ä¸ªåƒç´ */
+		if(mBitposY0==mScreenHeight){   //è¶…è¿‡æ¸¸æˆå±å¹•çš„åº•è¾¹
+			mBitposY0=-mScreenHeight;   //å›åˆ°å±å¹•ä¸Šæ–¹
 		}
 		if(mBitposY1==mScreenHeight){
 			mBitposY1=-mScreenHeight;
 		}
-		/*¸üĞÂÃ¿·¢×Óµ¯µÄÎ»ÖÃ×ø±ê£¬ÉÏÒÆ15¸öÏñËØ*/
+		/*æ›´æ–°æ¯å‘å­å¼¹çš„ä½ç½®åæ ‡ï¼Œä¸Šç§»15ä¸ªåƒç´ */
 		for(int i=0;i<BULLET_POOL_COUNT;i++){
 			mBullet[i].UpdateBullet();
 		}
-		/*¸üĞÂµĞ»úÎ»ÖÃ×ø±ê*/
+		/*æ›´æ–°æ•Œæœºä½ç½®åæ ‡*/
 		for(int i=0;i<ENEMY_POOL_COUNT;i++){
 			mEnemy[i].UpdateEnemy();
-			/*µĞ»úËÀÍöÇÒ±¬Õ¨¶¯»­½áÊø»òÕßµĞ»ú³¬¹ıÆÁÄ»»¹Î´ËÀÍöÔòÖØÖÃ×ø±ê*/
+			/*æ•Œæœºæ­»äº¡ä¸”çˆ†ç‚¸åŠ¨ç”»ç»“æŸæˆ–è€…æ•Œæœºè¶…è¿‡å±å¹•è¿˜æœªæ­»äº¡åˆ™é‡ç½®åæ ‡*/
 			if(mEnemy[i].enemyState==Enemy.ENEMY_DEATH_STATE&&
 					mEnemy[i].mPlayID==6||mEnemy[i].m_posY>=mScreenHeight){
 				mEnemy[i].init(UtilRandom(0,ENEMY_POOL_COUNT)*ENEMY_POS_OFF,0);
 			}
 		}
-		/*¸ù¾İÊ±¼ä³õÊ¼»¯·¢ÉäµÄ×Óµ¯Î»ÖÃ*/
+		/*æ ¹æ®æ—¶é—´åˆå§‹åŒ–å‘å°„çš„å­å¼¹ä½ç½®*/
 		if(mSendId<BULLET_POOL_COUNT){
 			long now=System.currentTimeMillis();
 			if(now-mSendTime>=PLAN_TIME){
@@ -178,13 +178,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 			else{
 				mSendId=0;
 			}
-			//×Óµ¯ÓëµĞÈËµÄÅö×²¼ì²â
+			//å­å¼¹ä¸æ•Œäººçš„ç¢°æ’æ£€æµ‹
 			Collision();
 		}
 	}
 	
 	public void Collision(){
-		//×Óµ¯ÓëµĞÈËµÄÅö×²¼ì²â
+		//å­å¼¹ä¸æ•Œäººçš„ç¢°æ’æ£€æµ‹
 		for(int i=0;i<BULLET_POOL_COUNT;i++){
 			for(int j=0;j<ENEMY_POOL_COUNT;j++){
 				if(( (mBullet[i].m_posX>=mEnemy[j].m_posX
@@ -196,7 +196,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 						&&mBullet[i].m_posY>=mEnemy[j].m_posY-60)
 						||(mBullet[i].m_posY<=mEnemy[j].m_posY+60
 						&&mBullet[i].m_posY>=mEnemy[j].m_posY))
-						){   //·¢ÉúÅö×²µĞÈËµÄ×´Ì¬ĞŞ¸ÄÎªËÀÍö
+						){   //å‘ç”Ÿç¢°æ’æ•Œäººçš„çŠ¶æ€ä¿®æ”¹ä¸ºæ­»äº¡
 				mEnemy[j].enemyState=Enemy.ENEMY_DEATH_STATE;
 				}
 			}
