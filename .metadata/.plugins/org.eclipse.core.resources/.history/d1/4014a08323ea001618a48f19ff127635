@@ -1,7 +1,0 @@
-package controller;
-
-import ui.FirstUIControllerServer;
-
-public class FirstUIControllerImpl implements FirstUIControllerServer{
-
-}
