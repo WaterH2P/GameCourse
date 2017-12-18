@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;thunder.planeFrame&apos; to &apos;PlaneFrame&apos;&#x0D;&#x0A;- Original project: &apos;Thunder&apos;&#x0D;&#x0A;- Original element: &apos;thunder.planeFrame&apos;&#x0D;&#x0A;- Renamed element: &apos;thunder.PlaneFrame&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;planeFrame&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;thunder{planeFrame.java[planeFrame" matchStrategy="1" name="PlaneFrame" qualified="false" references="true" similarDeclarations="false" stamp="1484661936868" textual="false" version="1.0"/>
-</session>
